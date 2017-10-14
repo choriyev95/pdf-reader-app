@@ -33,7 +33,7 @@ public class AppPrefs {
         return instance;
     }
 
-    
+
     // nomiga mos holda bu qaytaradi
     public int getPageNumber() {
         return preferences.getInt(KEY_PAGE_NUMBER, 0);
