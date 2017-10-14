@@ -1,20 +1,15 @@
 package com.example.chori.bookmaker;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.transition.Explode;
 import android.view.*;
 import android.view.animation.Animation;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.ScrollBar;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 
-import java.util.logging.Handler;
 
 
 public class ForeachSoftLogo extends AppCompatActivity implements OnPageChangeListener {
@@ -23,10 +18,8 @@ public class ForeachSoftLogo extends AppCompatActivity implements OnPageChangeLi
     private PDFView pdfView;
     private int currentPage,totalPages;
     ScrollBar scrollBar;
-    boolean Visiable=true;
+    private boolean VisiableBar=true;
     private int pagenumber=1;
-    SharedPreferences sharedPref;
-
     private AppPrefs appPrefs;
 
     @Override
@@ -48,10 +41,8 @@ public class ForeachSoftLogo extends AppCompatActivity implements OnPageChangeLi
         pagenumber=currentPage;
         getSupportActionBar().setSubtitle("Page "+currentPage+"/"+totalPages);
 
-        sharedPref= this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(getString(R.string.saved_high_score), pagenumber);
-        editor.commit();
+        // Saqlash mana shunday bo'ladi
+        appPrefs.savePageNumber(pagenumber);
     }
 
     @Override
@@ -78,24 +69,20 @@ public class ForeachSoftLogo extends AppCompatActivity implements OnPageChangeLi
         getSupportActionBar().setTitle("Name of the book");
         loadComplete(totalPages);
 
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        pagenumber = sharedPref.getInt(getString(R.string.saved_high_score), pagenumber);
-
         // Application context ishlatilishi shart
         appPrefs = AppPrefs.getInstance(getApplicationContext());
         pagenumber = appPrefs.getPageNumber();
 
-        // Saqlash mana shunday bo'ladi
-        // appPrefs.savePageNumber(pagenumber);
 
         pdfView = (PDFView) findViewById(R.id.pdf_view);
         scrollBar = (ScrollBar) findViewById(R.id.scrollBar);
+
         pdfView.setScrollBar(scrollBar);
         pdfView.fromAsset("book.pdf").defaultPage(pagenumber).onPageChange(this).load();
         pdfView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Visiable){
+                if (VisiableBar){
                     final Animation animation = new SlideTopAnimation(toolbar, SlideTopAnimation.Direction.UP);
                     toolbar.startAnimation(animation);
                 }
@@ -103,7 +90,7 @@ public class ForeachSoftLogo extends AppCompatActivity implements OnPageChangeLi
                     final Animation animation = new SlideTopAnimation(toolbar, SlideTopAnimation.Direction.DOWN);
                     toolbar.startAnimation(animation);
                 }
-                Visiable=!Visiable;
+                VisiableBar=!VisiableBar;
             }
         });
     }
