@@ -33,16 +33,7 @@ public class AppPrefs {
         return instance;
     }
 
-
-    //beqda faqat 1 ta narsa saqlasa buladimi??
-    // Bu yerda shunaqa
-    // Lekin kompozit tiplar kelsa ularni har bir maydonini alohida saqlasa bo'ladi
-    // Bu metod kod tushunarli chiqishi uchun
-    //yana qandeydir raqamni saqlash uchun yana alohida yasaymizmi??
-    // Bu narsa majburiymas
-    // Lekin tavsiya qilinadi
-    //bu saqlayobdi tugrimi yoki malumotni qaytarib berobdimi??
-
+    
     // nomiga mos holda bu qaytaradi
     public int getPageNumber() {
         return preferences.getInt(KEY_PAGE_NUMBER, 0);
