@@ -6,11 +6,11 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
         android:orientation="vertical"
-        tools:context="com.example.chori.bookmaker.ForeachSoftLogo">
+        tools:context="com.example.chori.bookmaker.ReaderActivity">
 
     <include
             layout="@layout/main_toolbar"
-            android:id="@+id/toolbar_layout"
+            android:id="@+id/toolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
     </include>
@@ -18,7 +18,7 @@
     <com.github.barteksc.pdfviewer.PDFView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/pdf_view"
+            android:id="@+id/pdfView"
             android:layout_weight="1"/>
 
     <com.github.barteksc.pdfviewer.ScrollBar
